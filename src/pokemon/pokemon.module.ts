@@ -3,17 +3,21 @@ import { PokemonService } from './pokemon.service';
 import { PokemonController } from './pokemon.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   controllers: [PokemonController],
   providers: [PokemonService],
+  // exports:[PokemonService], mi forma
   imports: [
+    ConfigModule,
     MongooseModule.forFeature([
     {
       name: Pokemon.name,
       schema:PokemonSchema,
     }
-  ]
-  )]
+  ],
+  )],
+   exports:[MongooseModule] //forma de fernando
 })
 export class PokemonModule {}
